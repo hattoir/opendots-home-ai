@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenDots Home AI | 個人利用のセルフホスト型AIアシスタント</title>
+  <meta name="description" content="OpenDots Home AI は、運営者個人が自宅サーバーで動かす、個人利用のセルフホスト型AIアシスタントです。Google Drive は自分のナレッジを参照・保存する目的に限って連携します。">
+  <link rel="canonical" href="https://hattoir.github.io/opendots-home-ai/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">本文へ移動</a>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="./">
+        <img src="assets/favicon.svg" alt="" width="28" height="28">
+        <span>OpenDots Home AI</span>
+      </a>
+      <nav class="main" aria-label="主要メニュー">
+        <ul>
+          <li><a href="./" aria-current="page">ホーム</a></li>
+          <li><a href="privacy.html">プライバシーポリシー</a></li>
+          <li><a href="terms.html">利用規約</a></li>
+          <li><a href="contact.html">お問い合わせ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="hero">
+      <span class="badge">個人利用・セルフホスト</span>
+      <h1>自分の家のサーバーで動かす、<br>自分専用のAIアシスタント</h1>
+      <p class="lead">OpenDots Home AI は、運営者個人が自宅のサーバーで動かしている、個人利用のAIアシスタントです。AIの推論は同じサーバー上のローカルモデルで行い、不特定多数の方に提供するサービスではありません。</p>
+      <div class="btns">
+        <a class="btn primary" href="privacy.html">プライバシーポリシー</a>
+        <a class="btn ghost" href="#drive">Google Drive 連携について</a>
+      </div>
+    </section>
+
+    <section aria-labelledby="about">
+      <h2 id="about">OpenDots Home AI とは</h2>
+      <p>オープンソースのAIワークスペース「OpenDots」（MIT License）をもとに、運営者が自分の環境向けに構成したものです。クラウドのAIサービスではなく、運営者が管理する1台のサーバーの中で完結することを重視しています。</p>
+      <div class="info">
+        <strong>公開サービスではありません。</strong>
+        一般の方向けのアカウント登録や、Googleアカウントでのログイン機能はありません。Googleアカウントを連携しているのは、運営者本人のアカウントのみです。
+      </div>
+      <p class="meta">本サイトは非公式の個人運用であり、OpenDots の開発元が提供・保証するものではありません。</p>
+    </section>
+
+    <section aria-labelledby="features">
+      <h2 id="features">主な機能</h2>
+      <div class="grid two">
+        <article class="card">
+          <h3>ローカルAIとの対話</h3>
+          <p>質問や作業の相談を、同じサーバー上で動く Ollama のローカルモデルに行います。入力内容を外部のAI事業者へ送らない設定で運用しています。</p>
+        </article>
+        <article class="card">
+          <h3>ナレッジの参照</h3>
+          <p>運営者自身の Google Drive にあるメモ・仕様書などから、質問に関係するものを探し、出典リンク付きの根拠として回答に添えます。</p>
+        </article>
+        <article class="card">
+          <h3>承認してから保存</h3>
+          <p>AIがまとめた知見をDriveへ保存するときは、内容を確認して承認した場合に限り、ノートとして書き込みます（新規作成、または承認済みの内容での更新）。</p>
+        </article>
+        <article class="card">
+          <h3>他の作業ツールとの連携</h3>
+          <p>タスク管理やコード管理など、運営者の作業ツールとも連携します。本ページが対象とするのは Google Drive 連携です。</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="selfhost">
+      <h2 id="selfhost">個人利用・セルフホストという設計</h2>
+      <ul>
+        <li><strong>利用者は運営者本人のみ。</strong>外部の利用者から Google のデータを預かることはありません。</li>
+        <li><strong>運営者の機器で動作。</strong>アプリ本体は、インターネットに公開されない私的なネットワーク内の自己管理サーバーで動かしています。</li>
+        <li><strong>AIの処理はローカル。</strong>Google Drive から取得した内容は、同じサーバー上のモデルにのみ渡します。外部のAI APIを接続先にすると起動しない安全装置を有効にしています。</li>
+        <li><strong>認証情報は非公開。</strong>OAuth の認証情報はサーバー上の非公開ファイルにのみ保管し、本サイトにもソースコードの公開リポジトリにも含めません。</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="drive">
+      <h2 id="drive">Google Drive との連携目的</h2>
+      <p>Google Drive は、運営者自身が整理しているナレッジ（メモ・仕様書・引き継ぎ文書など）を、AIが参照・追記するために使います。Drive 内のそれ以外の用途には使いません。利用する権限（スコープ）と目的は次のとおりです。</p>
+
+      <div class="scope">
+        <h3><span class="mono">drive.readonly</span>（ファイルの閲覧）</h3>
+        <dl>
+          <dt>目的</dt>
+          <dd>質問に関連するナレッジ文書の本文を読み、回答の根拠として使うため。ファイル名・更新日時などのメタデータの確認（重複確認など）にも、このスコープだけを使います。</dd>
+          <dt>実際の範囲</dt>
+          <dd>あらかじめ設定した特定のフォルダ内のみを検索します。テキスト・Markdown・Google ドキュメントの本文について、1件あたり先頭の一部（最大1,100文字）を読み取り、最大10件を根拠として扱います。</dd>
+        </dl>
+      </div>
+
+      <div class="scope">
+        <h3><span class="mono">drive.file</span>（アプリが作成・開いたファイルのみ）</h3>
+        <dl>
+          <dt>目的</dt>
+          <dd>確認・承認済みの知見を、ナレッジノートとして Drive に保存（新規作成・更新）するため。</dd>
+          <dt>範囲</dt>
+          <dd>このスコープで操作できるのは、アプリが作成した、またはユーザーが明示的に開いたファイルに限られます。Drive 全体の編集・削除権限（<span class="mono">drive</span>）は要求しません。</dd>
+        </dl>
+      </div>
+
+      <p>データの扱いの詳細（保存場所、外部への送信、削除・連携解除の方法）は <a href="privacy.html">プライバシーポリシー</a> に記載しています。</p>
+    </section>
+
+    <section aria-labelledby="en">
+      <h2 id="en">English summary</h2>
+      <p lang="en">OpenDots Home AI is a personal, self-hosted AI assistant run by an individual on a privately managed server. It connects to the operator's own Google Drive to read (<code>drive.readonly</code>) and to save approved notes (<code>drive.file</code>). AI processing runs on a local model on the same server; Google user data is not sent to external AI providers and is not used for advertising or model training. See the <a href="privacy.html#en-summary">privacy policy summary</a>.</p>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <ul>
+        <li><a href="privacy.html">プライバシーポリシー</a></li>
+        <li><a href="terms.html">利用規約</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
+      </ul>
+      <p>OpenDots Home AI は個人による運営です。最終更新: 2026年10月12日</p>
+    </div>
+  </footer>
+</body>
+</html>
